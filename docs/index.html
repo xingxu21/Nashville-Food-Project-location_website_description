@@ -1,8 +1,369 @@
-<!DOCTYPE html>
 <html>
 <head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans' rel='stylesheet' type='text/css'>
+	<script src="distributions.js"></script>
+	<script src="gardens.js"></script>
+    <script src="kitchen.js"></script>
+	
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+
+    <style>
+					
+        #map {
+            position: fixed;
+            width: 50%;
+        }
+
+        #features {
+            width: 50%;
+            margin-left: 50%;
+            font-family: "Work Sans";
+            overflow-y: scroll;
+            background-color: #99876f;
+        }
+
+        section {
+            padding: 25px 50px;
+            line-height: 25px;
+            border-bottom: 1px solid #ddd;
+            opacity: 0.25;
+            font-size: 13px;
+			color: white;
+        }
+
+        section.active {
+            opacity: 1;
+        }
+
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 200px;
+        }
+
+        .mapboxgl-popup {
+            max-width: 400px;
+            /*font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;*/
+            font: 12px/20px 'Work Sans', Arial, Helvetica, sans-serif;
+        }
+
+        .marker-title {
+            font-weight: 700;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .marker-description {
+            max-width:100%;
+            width:auto;
+            height:auto;
+            border: 3px inset #99876f;
+            border-radius: 3px;
+
+        }
+
+        #jobcorps {
+            height:15em;
+            
+        }
+        
+        #projreturn {
+            height:15em;
+        }
+
+        .sidebar-header {
+            text-shadow: 1px 1px 1px lightgray
+        }
+</style>
+
+    <div id='map'></div>
+    <div id='features'>
+        <style>
+            a, a:visited, a:hover {
+                color:aqua;
+                text-decoration:none;
+                text-shadow: 1px 1px 1px darkgray
+            }
+            h3 {
+                text-decoration:underline;
+                text-decoration-color:darkgray;
+            }
+        </style>
+        <section id='gardens' class='active'>
+            <h2 class="sidebar-header">The Gardens</h2>
+				<h4>Agricultural Program of Middle Tennesseee</h4>
+						<p>In partnership with the Center for Refugees and Immigrants in Tennessee, our Wedgewood Urban Garden has 25 individual plots for a community of refugees from Bhutan. These gardeners attend regular on-site trainings covering best-practices for growing food in Middle Tennessee, but they also bring generations of farming knowledge from their home country. The Bhutanese gardeners grow crops familiar to any TN farmer, including tomatoes, cucumbers and eggplant, alongside some of their favorites from home, such as bitter gourd and extremely hot peppers. Under the same program we also provide trainings for another 25 refugee gardeners growing food for market and home-use at two other gardens in town. For more information about this program contact <a href="mailto:christina@thenashvillefoodproject.org?Subject=Refugee%20Agricultural%20Program" target="_top">Garden Manager Christina.</a></p>
+
+					Check out this beautiful video about the Refugee Agricultural Program.
+					<iframe width="461" height="259" src="https://www.youtube.com/embed/nQsiudgkjW4" frameborder="0" allowfullscreen></iframe>
+
+				<h4>Wedgewood-Houston Neighbors' Garden</h4>
+						<p>Located at our Wedgewood Urban Gardens, and in partnership with Fall Hamilton Elementary School, 15 families from the neighborhood attend monthly garden trainings and grow food on individual plots. The multi-generational and multi-cultural gardeners range from grandmothers growing alongside their children and grandchildren to a new family in the neighborhood from Somalia. Gardeners are often seen helping out in each other's plots, sharing work in a larger community plot and enjoying all of the perennial herbs and flowers that this space has to offer.</p>
+        
+						<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef482fe4b0c0516662e565/1424967728632/photo+4+%283%29.JPG?format=300w" width="441" height="331" />
+						
+		</section>
+		
+		<section id='Wedgewood Urban Garden'>
+				<h4>Wedgewood Urban Garden</h4>
+						<p>Wedgewood Urban Garden (WUG) is an urban oasis, located in a mixed use neighborhood near the Tennessee State Fairgrounds. With the help of many volunteers, The Nashville Food Project grows seasonal annual crops such as okra, corn, cabbage, winter and summer squash, beets, cucumbers and kale on the land to help support our programs. The garden also houses two distinct community spaces where individual gardeners grow food for themselves and their families. The large tree-covered pavilion here allows TNFP to host outdoor classes and workshops for gardeners and the community at large. WUG embraces a permaculture vision and is home to perennial fruit trees and bushes, a large herb garden and an abundance of flowers for pollinators and humans alike.</p>
+
+						<p>Our gardeners range from a group of elders from Bhutan to youth from the Oasis Center. Our volunteers assist with all aspects of growing, including turning the ground, planting seeds, weeding and harvesting fresh produce. Ready to join us? Please <a href="http://www.hon.org/HOC__Volunteer_Opportunity_Details_Page?id=a0C1200000nDorbEAC&wrs=HOC0034-003-70208e7f-14f0-4472-922c-d2d2be602208">sign up</a> so we’ll know when you’ll be there.</p> 
+		
+						<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47fde4b01b969d31f5b5/1424967678024/148713_342823179114923_623184941_n.jpg?format=300w" width="441" height="331" />
+
+		</section>
+ 
+		<section id='Woodmont Garden'>
+				<h4>Woodmont Garden</h4>
+						<p>Right outside the kitchens of The Nashville Food Project, on the campus of Woodmont Christian Church, the Woodmont Garden grows the highly nutritious greens and vegetables that make our meals nutrient powerhouses. Here we grow greens of all shapes and sizes - kale, chard, lettuce, spinach, and collards - as well as tomatoes, cucumbers, carrots, and peas. The bountiful herbs make it easy for our volunteer cooks to simply walk out the back door to harvest fresh basil, parsley and cilantro for a day's meal. Our mini-urban farm is complete with a large greenhouse for starting plants early in the spring for our gardens and plant sale; an outdoor vegetable washing station for fast and easy cleaning of produce; several styles of compost bins; top-bar bee hives; a tool shed, and more. Want to join us for a mid-city escape? <a href="http://www.hon.org/HOC__Volunteer_Opportunity_Details_Page?id=a0C1200000nDrA2EAK&wrs=HOC0034-003-70208e7f-14f0-4472-922c-d2d2be602208">Sign up here</a> to volunteer.</p>
+
+						<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47fde4b0c0516662e420/1424967677701/308418_224867897577119_1430949255_n.jpg?format=300w" width="441" height="331" />
+						
+		</section>
+ 
+		<section id='McGruder Garden'>
+				<h4>McGruder Garden</h4>
+						<p>Located behind the McGruder Family Resource Center in North Nashville, the McGruder Community Garden is a space where neighbors take ownership of their own plots to grow produce for themselves and their families. The garden's beautiful infrastructure has been in place since 2009, and in 2014 The Nashville Food Project partnered with McGruder to increase community participation. Hundreds of community members and volunteer groups have since worked together to remove grass from the garden, prepare the raised beds for spring, and restore the adjacent fruit orchard. The garden now boasts 13 raised beds and four handicap beds, and the ages of involved community members spans 70 years. Twelve dedicated neighbors have come together to form the "Green Thumbers," a leadership group that works together to make communal decisions for the garden to ensure its long-term success. By offering monthly training workshops and access to tools, the goals for the garden are three-fold: to strengthen community ties, increase self-efficacy among participants, and grow organic produce that is otherwise difficult to access in North Nashville. Sign up <a href="http://www.hon.org/HOC__Volunteer_Opportunity_Details_Page?id=a0C1200000eK6PcEAK&wrs=HOC0034-003-70208e7f-14f0-4472-922c-d2d2be602208">here</a> to help out at McGruder Garden. </p> 
+
+						<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47fde4b0c0516662e422/1424967678374/524047_342823112448263_94168672_n.jpg?format=300w" width="441" height="331" />
+		
+		</section>
+ 
+        <section id='kitchen'>
+            <h2 class="sidebar-header">The Kitchen</h2>
+				<p>The Nashville Food Project is a joyful place for people who love to cook and beginners alike. On any given day, you will find a diverse group of volunteers assembled for meal prep-- college students elbow-to-elbow with formerly-incarcerated men and women, right next to a couple of seasoned seniors and a volunteer from a tony Green Hills address. Each one gladly shares the space, and their combined presence makes the preparation of our meals incredibly rewarding.</p>
+
+				<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54f2856de4b079e94c283f38/1425180014611/Foggy+Hollow+donates+surplus+eggs+to+TNFP.jpg?format=300w" width="441" height="331" />				
+				
+				<p>We use the freshest ingredients available, including several tons of produce we grow in our own gardens each year, and tens of thousands of pounds of food donated by our <a href="http://www.thenashvillefoodproject.org/food-partners">Food Donation Partners</a>. There’s a lot of creativity involved in planning meals based on what comes in and a lot of work for the volunteers who chop, slice, clean, assemble, blanch, compost and cook. Currently, we serve about 1,100 meals each week.</p>
+
+				<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47fde4b01b969d31f5b7/1424967678550/429781_313730898690818_407771023_n.jpg?format=300w" width="441" height="331" />
+				
+				<p><a href="http://www.thenashvillefoodproject.org/give-time">Meal Prep</a> takes place multiple times each week. There is no need for a long-term commitment—only a willingness to serve and to share. Let us know you’re coming by signing up <a href="http://www.hon.org/HOC__Volunteer_Opportunity_Details_Page?id=a0CA000000i1LaAMAU&wrs=HOC0034-003-70208e7f-14f0-4472-922c-d2d2be602208">here</a>.</p>
+
+				<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47d7e4b0a0e0c10bbc9e/1424967643640/IMG_5506.JPG?format=300w" width="441" height="331" />
+				<img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54f284b4e4b0f251eeb93669/1425179836372/meal+prep+2014.jpg?format=300w" width="441" height="331" />        
+          
+                <img data-load="false" data-src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47dde4b094722876bc3f/1424967649799/IMG_5514.JPG" data-image="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47dde4b094722876bc3f/1424967649799/IMG_5514.JPG" data-image-dimensions="2448x3264" data-image-focal-point="0.5398230088495575,0.30666666666666664" data-type="image" class="sqs-gallery-design-strip-slide loaded" id="yui_3_17_2_1_1459268350749_522" alt="IMG_5514.JPG" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/54ef47c5e4b0e800334b02ee/54ef47dde4b094722876bc3f/1424967649799/IMG_5514.JPG?format=100w" data-image-resolution="100w">
+
+        </section>
+		
+        <section id='distributions'>
+            <h2 class="sidebar-header">The Food Trucks</h2>
+				<p>Every week, The Nashville Food Project shares more than 1,100 healthy, made-from-scratch meals and snacks with communities across Davidson County. We work with a variety of <a href="http://www.thenashvillefoodproject.org/meal-distribution-partners">Meal Distribution Partners</a> to better serve those who are living on the margins in our city, including after school programs, ESL classes and emergency shelters. By offering food support to other established nonprofits and community groups, these meals create opportunities for our partners to focus their energy and resources on their unique missions. In this way, we believe our meals can become one piece of a broader solution to hunger and poverty.</p>
+
+            <img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-bottom:12.5px;padding-top:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/t/54ef4704e4b0ae0904db9daa/1424967454459/?format=500w" width="441" height="331" />				
+				
+				<p>Our food trucks offer more than just meals. Sharing food is about sharing nourishment—as much for spirit and soul as for the body. By enjoying meals together, food has the power to reduce social isolation and build community. They also create opportunities for lasting relationships that can transform the ways we think of “us” and “them.” Taking this food on the road allows us to be where we’re needed the most.</p>
+
+            <img style="width:90%;height:auto;margin-left:5%;margin-right:5%;padding-top:12.5px;padding-bottom:12.5px" src="http://static1.squarespace.com/static/53ecdafde4b07f0225df2a99/t/54f27f2ae4b0565a8a774d5e/1425178492508/Front+Porch+%288%29.JPG?format=1000w" width="441" height="331" />				
+				
+				<p>Volunteer opportunities on our trucks are available as assigned teams and drop-ins. When you’re ready to ride, sign up <a href="http://www.thenashvillefoodproject.org/give-time">here</a>.</p>
+
+				<p>Looking for a hot meal or other food support? Our meals are included in the current <a href="http://www.wttin.org/resource/current-meal-schedule-and-locations">Nashville Meals Schedule and Locations</a> published on “Where to Turn in Nashville”- an online resource guide published by The Contributor and collaborators.</p>
+
+
+        </section>
+		
+    </div>
+    <script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZm9vZHByb2plY3QyMDE2IiwiYSI6ImNpa3Btdm9xZDEybjh0bm02ZW8ybDlnajMifQ.rgriP-yv592nJJgWrizoNg';
+
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/foodproject2016/cimdmp3xy00gba6m4wh97dzco', // mapbox style ID for specified map being used
+    center: [-86.7833, 36.1667], // GPS point map will be centered on 
+    zoom: 11, // zoom level map will initiate on 
+    pitch: 55, //level at which 
+});
+
+//ADDED IN for adding points on map start//
+
+map.on('style.load', function () {
+    // Add marker data as a new GeoJSON source.
+	map.addSource("distributions", distributions);
+	map.addSource("gardens", gardens);
+    map.addSource("kitchen", kitchen);
+
+    // Add a layer showing the distributions.
+    map.addLayer({
+        "id": "distributions",
+        "interactive": true,
+        "type": "symbol",
+        "source": "distributions",
+        "layout": {
+            "icon-image": "Share",
+            "icon-size": .25, // size of the icon
+            "icon-allow-overlap": true,
+			"text-field": "{title}",
+			"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top"
+        }
+    });
+	
+	// Add a layer showing the gardens.
+	map.addLayer({
+        "id": "gardens",
+        "interactive": true,
+        "type": "symbol",
+        "source": "gardens",
+        "layout": {
+            "icon-image": "Grow",
+            "icon-size": .25, // size of the icon
+            "icon-allow-overlap": true,
+			"text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top"
+        }
+    });
+	
+	// Add a layer showing the kitchen.
+	map.addLayer({
+        "id": "kitchen",
+        "interactive": true,
+        "type": "symbol",
+        "source": "kitchen",
+        "layout": {
+  			"icon-image": "Cook",
+            "icon-size": .25, // size of the icon
+            "icon-allow-overlap": true,
+			"text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top"
+        }
+    });
+});
+
+//ADDED IN for adding points on map end//
+
+//ADDED IN for zooming feature start//
+var chapters = {
+    'gardens': {
+        center: [-86.77022999999997, 36.133156],
+        zoom: 15.5,
+        pitch: 55
+    },
+	'Wedgewood Urban Garden': {
+        
+        center: [-86.77022999999997, 36.133156],
+        zoom: 15.5,
+		pitch: 55,
+        speed: 0.5
+    },
+    'Woodmont Garden': {
+        center: [-86.81169729999999, 36.1124106],
+        zoom: 15.5,
+        pitch: 55,
+        speed: 0.5
+    },
+    'McGruder Garden': {
+        center: [-86.81817269999999, 36.1827394],
+        zoom: 15,
+		pitch: 55,
+        speed: 0.5
+    },
+    'kitchen': {
+        duration: 6000,
+        center: [-86.81169729999999, 36.1124106],
+        zoom: 15,
+        pitch: 55,
+        speed: 0.5
+    },
+    'distributions': {
+        center: [-86.7833, 36.1667],
+        zoom: 11,
+        speed: 0.6,
+        pitch: 55
+    }
+};
+
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+
+var activeChapterName = 'gardens';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+
+    map.flyTo(chapters[chapterName]);
+
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+
+    activeChapterName = chapterName;
+}
+
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+
+//ADDED IN for zooming feature end//
+
+//ADDED IN for adding popUp start//
+
+
+// When a click event occurs near a marker icon, open a popup at the location of
+// the feature, with description HTML from its properties.
+map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['distributions', 'kitchen', 'gardens'] });
+
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    var popup = new mapboxgl.Popup()
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(map);
+});
+
+// Use the same approach as above to indicate that the symbols are clickable
+// by changing the cursor style to 'pointer'.
+map.on('mousemove', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['distributions', 'kitchen', 'gardens'] });
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+});
+
+/////////////////////////
+
+//ADDED IN for adding popUp end//
+
+    </script>
 
 </body>
 </html>
